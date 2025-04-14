@@ -1,0 +1,17 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+{% endblock %} 
+{% block content %}
+<section class="cat-container">
+  <div class="cat-details">
+    <h1>{{ tvshow.title }}</h1>
+    <p>{{ tvshow.seasons }}</p>
+    <p>{{ tvshow.rating }}</p>
+    <p>{{ tvshow.recommended }}</p>
+    <p>{{ tvshow.finished_watching }}</p>
+    <p>{{ tvshow.description }}</p>
+    <p>{{ tvshow.platforms }}</p>
+  </div>
+</section>
+{% endblock %}

@@ -1,23 +1,20 @@
 {% extends 'base.html' %} {% load static %} {% block head %}
-<link
-  rel="stylesheet"
-  href="{% static 'css/cats/cat-index.css' %}"
-/>
 {% endblock %} {% block content %}
 
-<h1>Tv Shows</h1>
+<h1 class="header">Tv Shows</h1>
 
 <section class="card-container">
   {% for tvshow in tvshows %}
   <div class="card">
     <a href="{% url 'tvshow-detail' tvshow.id %}">
-        <div class="card-content">
+        <div class="card-info" id="index-info">
             <h2>{{ tvshow.title }}</h2>
-            <p>{{ tvshow.seasons }}</p>
-            <p>{{ tvshow.rating }}</p>
-            <p>{{ tvshow.recommended }}</p>
-            <p>{{ tvshow.description }}</p>
-            <p>{{ tvshow.platforms }}</p>
+            {% if tvshow.recommended %}
+                <p>You recommend others to watch {{ tvshow.title }}</p>
+            {% else %}
+                <p>You don't recommend others to watch {{ tvshow.title }}</p>
+            {% endif %}
+            <p>You rate {{ tvshow.title }} a {{ tvshow.rating }}/5</p>
         </div>
     </a>
   </div>

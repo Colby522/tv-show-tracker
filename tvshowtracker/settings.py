@@ -117,7 +117,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-LOGIN_URL = 'home'
+STATICFILES_DIR = [BASE_DIR / 'static']
+
+LOGIN_URL = 'login'
 
 LOGIN_REDIRECT_URL = 'tvshow-index'
 

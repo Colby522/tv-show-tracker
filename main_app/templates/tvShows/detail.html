@@ -3,19 +3,27 @@
 {% block head %}
 {% endblock %} 
 {% block content %}
-<section class="cat-container">
-  <div class="cat-details">
+<section class="tvshow-container">
+  <div class="tvshow-detail">
     <h1>{{ tvshow.title }}</h1>
-    <p>{{ tvshow.seasons }}</p>
-    <p>{{ tvshow.rating }}</p>
-    <p>{{ tvshow.recommended }}</p>
-    <p>{{ tvshow.finished_watching }}</p>
-    <p>{{ tvshow.description }}</p>
-    <p>{{ tvshow.platforms }}</p>
+    <p>Seasons: {{ tvshow.seasons }}</p>
+    <p>Rating: {{ tvshow.rating }}/5</p>
+    {% if tvshow.recommended %}
+        <p>You recommend others to watch {{ tvshow.title }}</p>
+    {% else %}
+        <p>You don't recommend others to watch {{ tvshow.title }}</p>
+    {% endif %}
+    {% if tvshow.finished_watching %}
+        <p>You have finished {{ tvshow.title }}</p>
+    {% else %}
+        <p>You're still watching {{ tvshow.title }}</p>
+    {% endif %}
+    <p>Description: {{ tvshow.description }}</p>
+    <p>Platforms: {{ tvshow.platforms }}</p>
   </div>
   <div class="tvshow-actions">
-    <a href="{% url 'tvshow-update' tvshow.id %}" class="btn warn">Edit</a>
-    <a href="{% url 'tvshow-delete' tvshow.id %}" class="btn danger">Delete</a>
+    <a href="{% url 'tvshow-update' tvshow.id %}" class="edit-btn">Edit</a>
+    <a href="{% url 'tvshow-delete' tvshow.id %}" class="delete-link">Delete</a>
   </div>
 </section>
 {% endblock %}

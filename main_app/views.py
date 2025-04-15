@@ -9,19 +9,17 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 def home(request):
-    return HttpResponse('<h1>Hello</h1>')
-
-def about(request):
-    return render(request, 'about.html')
+    return render(request, 'home.html')
 
 @login_required
 def tv_shows(request):
     tvshows = Tv_Show.objects.filter(user=request.user)
     return render(request, 'tvShows/index.html', {'tvshows': tvshows})
 
+@login_required
 def tvshow_detail(request, tvshow_id):
     tvshow = Tv_Show.objects.get(id=tvshow_id)
-    return render(request, 'tvShows/detail.html', {'tvshow': tvshow})
+    return render(request, 'tvShows/detail.html', {'tvshow': tvshow})    
 
 def signup(request):
     error_message = ''
@@ -37,6 +35,10 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'signup.html', context)
 
+def recommended_list(request):
+    tvshows = Tv_Show.objects.filter(recommended=True)
+    return render(request, 'tvShows/recommended.html', {'tvshows': tvshows})
+
 class TvShowCreate(LoginRequiredMixin, CreateView):
     model = Tv_Show
     fields = ['title', 'seasons', 'rating', 'recommended', 'finished_watching', 'description', 'platforms']
@@ -47,12 +49,12 @@ class TvShowCreate(LoginRequiredMixin, CreateView):
 
 class TvShowUpdate(LoginRequiredMixin, UpdateView):
     model = Tv_Show
-    fields = '__all__'
+    fields = ['title', 'seasons', 'rating', 'recommended', 'finished_watching', 'description', 'platforms']
 
 class TvShowDelete(LoginRequiredMixin, DeleteView):
     model = Tv_Show
     success_url = '/tvShows/'
 
-class Home(LoginView):
-    template_name = 'home.html'
+class Login(LoginView):
+    template_name = 'login.html'
 

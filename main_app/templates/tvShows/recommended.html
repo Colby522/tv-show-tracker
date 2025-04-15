@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+{% endblock %} {% block content %}
+
+<h1 class="header">Recommended Tv Shows</h1>
+
+<section class="card-container">
+  {% for tvshow in tvshows %}
+  <div class="card">
+        <div class="card-content">
+            <h2>{{ tvshow.title }}</h2>
+            <ul class="card-info">
+                <li>Rating: {{ tvshow.rating }}</li>
+                <li>Seasons: {{ tvshow.seasons }}</li>
+                <li>Description: {{ tvshow.description }}</li>
+                <li>Platforms: {{ tvshow.platforms }}</li>
+            </ul>
+        </div>
+  </div>
+  {% endfor %}
+</section>
+
+{% endblock %}

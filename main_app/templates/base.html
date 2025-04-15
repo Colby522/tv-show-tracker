@@ -8,28 +8,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" type="image/png" href="" />
     <title>Tv Show Tracker</title>
-    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <link rel="stylesheet", href="{% static 'css/base.css' %}" />
     {% block head %} 
     {% endblock %}
   </head>
   <body>
     <header>
       <nav>
-        <ul>
+        <ul class="navbar">
             {% if user.is_authenticated %}
-                <li><a href="/about">About</a></li>
-                <li><a href="/tvShows">All Tv Shows</a></li>
-                <li><a href="{% url 'tvshow-create' %}">Add a Show</a></li>
-                <li>
+                <li class="navlist"><a href="/tvShows">All Tv Shows</a></li>
+                <li class="navlist"><a href="{% url 'tvshow-create' %}">Add a Show</a></li>
+                <li class="navlist"><a href="/tvShows/recommendations">Recommendations</a></li>
+                <li class="navlist">
                     <form id="logout-form" method="post" action="{% url 'logout' %}">
                         {% csrf_token %}
-                        <button type="submit">Log out</button>
+                        <button type="submit" class="logout-button">Log out</button>
                     </form>
                 </li>
             {% else %}
-                <li><a href="{% url 'about' %}">About</a></li>
-                <li><a href="{% url 'home' %}">Login</a></li>
-                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                <li class="navlist"><a href="{% url 'recommendations' %}">Recommendations</a></li>
+                <li class="navlist"><a href="{% url 'login' %}">Login</a></li>
+                <li class="navlist"><a href="{% url 'signup' %}">Sign Up</a></li>
             {% endif %}
         </ul>
       </nav>
